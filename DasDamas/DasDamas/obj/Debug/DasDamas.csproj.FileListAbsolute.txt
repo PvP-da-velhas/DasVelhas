@@ -1,0 +1,8 @@
+C:\Users\Miguel\Desktop\Ava\DasDamas\DasDamas\bin\Debug\DasDamas.exe.config
+C:\Users\Miguel\Desktop\Ava\DasDamas\DasDamas\bin\Debug\DasDamas.exe
+C:\Users\Miguel\Desktop\Ava\DasDamas\DasDamas\bin\Debug\DasDamas.pdb
+C:\Users\Miguel\Desktop\Ava\DasDamas\DasDamas\obj\Debug\DasDamas.csproj.AssemblyReference.cache
+C:\Users\Miguel\Desktop\Ava\DasDamas\DasDamas\obj\Debug\DasDamas.csproj.SuggestedBindingRedirects.cache
+C:\Users\Miguel\Desktop\Ava\DasDamas\DasDamas\obj\Debug\DasDamas.csproj.CoreCompileInputs.cache
+C:\Users\Miguel\Desktop\Ava\DasDamas\DasDamas\obj\Debug\DasDamas.exe
+C:\Users\Miguel\Desktop\Ava\DasDamas\DasDamas\obj\Debug\DasDamas.pdb
