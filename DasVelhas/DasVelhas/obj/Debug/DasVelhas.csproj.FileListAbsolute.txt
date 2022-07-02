@@ -1,0 +1,8 @@
+C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\bin\Debug\DasVelhas.exe.config
+C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\bin\Debug\DasVelhas.exe
+C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\bin\Debug\DasVelhas.pdb
+C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.csproj.AssemblyReference.cache
+C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.csproj.SuggestedBindingRedirects.cache
+C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.csproj.CoreCompileInputs.cache
+C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.exe
+C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.pdb

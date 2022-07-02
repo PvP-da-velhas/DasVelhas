@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{95109BEB-F00C-4BE8-87E8-9DE387D82BDA}</ProjectGuid>
+    <ProjectGuid>{CD117576-4583-4C58-96AB-21735644BE86}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>DasDamas</RootNamespace>
-    <AssemblyName>DasDamas</AssemblyName>
+    <RootNamespace>DasVelhas</RootNamespace>
+    <AssemblyName>DasVelhas</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
