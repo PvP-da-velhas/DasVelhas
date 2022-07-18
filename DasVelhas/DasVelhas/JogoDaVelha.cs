@@ -15,10 +15,14 @@ namespace Testando
         private string[,] Posicoes = new string[3, 3];
         private string vez;
         private int QuantidadePreenchida;
-        List<int> Lista1 = new List<int>();
+        List<string> Lista1 = new List<string>();
         private string Simb1;
         private string Simb2;
         private int Adversario;
+        private string PrimeiroJogador;
+        private string Dificuldade;
+        private int contagem;
+        private int limite;
 
         public JogoDaVelha()
         {
@@ -34,8 +38,25 @@ namespace Testando
             Console.ReadLine();
             Console.Clear();
 
+            //Escolhendo a dificuldade
+            Console.WriteLine("Jogará em qual dificuldade?\n\n" +
+                              "Muito rápido[1]\n\n" +
+                              "Rápido[2]\n\n" +
+                              "Normal[3]");
+            while (true)
+            {
+                Dificuldade = Console.ReadLine();
+                if (Dificuldade != "1" && Dificuldade != "2" && Dificuldade != "3")
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Escolha uma opção válida.");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+                else { Console.Clear(); break; }
+            }
+
             //Escolhendo o adversário
-                Console.WriteLine("Jogará contra o computador [Comp] ou contra outro jogador [Jog]?");
+            Console.WriteLine("Jogará contra o computador [Comp] ou contra outro jogador [Jog]?");
             int P0 = 0;
             while(P0 == 0)
             {
@@ -58,7 +79,7 @@ namespace Testando
                         while (P1 == 0)
                         {
                             Simb1 = Console.ReadLine();
-                            if ((Simb1.Length != 1) || (Simb1 == " "))
+                            if ((Simb1.Length != 1) || (Simb1 == " ") || (Simb1 == ""))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Escolha um único carácter diferente de espaço como símbolo.");
@@ -67,13 +88,13 @@ namespace Testando
                             else { P1 = 1; }
                         }
 
-                        // Símbolo do jogador 2
+                        // Símbolo do computador
                         Console.WriteLine("Digite o símbolo que o computador usará: ");
                         int P2 = 0;
                         while (P2 == 0)
                         {
                             Simb2 = Console.ReadLine();
-                            if ((Simb2.Length != 1) || (Simb2 == " "))
+                            if ((Simb2.Length != 1) || (Simb2 == " ") || (Simb2 == Simb1) || (Simb1 == ""))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Escolha um único carácter diferente de espaço como símbolo.");
@@ -84,11 +105,11 @@ namespace Testando
 
                         // Quem começará
                         Console.Clear();
-                        Console.WriteLine("Começar com o você[1] ou com o computador[2]?");
+                        Console.WriteLine("Começar com você[1] ou com o computador[2]?");
                         int P3 = 0;
                         while (P3 == 0)
                         {
-                            string PrimeiroJogador = Console.ReadLine();
+                            PrimeiroJogador = Console.ReadLine();
                             if (PrimeiroJogador == "1")
                             {
                                 vez = Simb1;
@@ -111,9 +132,19 @@ namespace Testando
                         Console.Clear();
                         MostradosNaTabela();
 
+                        //Caso o computador jogue primeiro
+                        if (PrimeiroJogador == "2")
+                        {
+                            FazerTabela();
+                            Delay();
+                            computadorVez();
+                            MudarVez();
+                        }
+
                         //Jogo Rodando
                         while (!FimDeJogo)
                         {
+                            Tempos();
                             FazerTabela();
                             VerEscolhaUsuario();
                         }
@@ -160,14 +191,13 @@ namespace Testando
                         int P2 = 0;
                         while (P2 == 0)
                         {
-                            Simb1 = Console.ReadLine();
-                            if ((Simb1.Length != 1) || (Simb1 == " "))
+                            Simb2 = Console.ReadLine();
+                            if ((Simb2.Length != 1 ) || (Simb2 == " ") || (Simb2 == Simb1))
                             {
                                 Console.ForegroundColor = ConsoleColor.Red;
                                 Console.WriteLine("Escolha um único carácter diferente de espaço como símbolo.");
                                 Console.ForegroundColor = ConsoleColor.Green;
                             }
-
                             else { P2 = 1; }
                         }
 
@@ -203,8 +233,10 @@ namespace Testando
                         // Jogo rodando
                         while (!FimDeJogo)
                         {
+                            Tempos();
                             FazerTabela();
                             VerEscolhaUsuario();
+
                         }
 
                         // Jogar novamente
@@ -232,6 +264,8 @@ namespace Testando
         {
             if (ValidarEscolhaUsuario(posicaoEscolhida01, posicaoEscolhida02) == true)
             {
+                QuantidadePreenchida++;
+                contagem = 0;
                 PreencherEscolha(posicaoEscolhida01, posicaoEscolhida02);
                 VerificarFimDeJogo();
                 MudarVez();
@@ -244,6 +278,8 @@ namespace Testando
         {
             if (ValidarEscolhaUsuario(posicaoEscolhida01, posicaoEscolhida02) == true)
             {
+                QuantidadePreenchida++;
+                contagem = 0;
                 PreencherEscolha(posicaoEscolhida01, posicaoEscolhida02);
                 VerificarFimDeJogo();
                 MudarVez();
@@ -255,9 +291,11 @@ namespace Testando
             }
             else { }
         }
+
         // Verifica se há um ganhador ou se há um empate
         private void VerificarFimDeJogo()
         {
+            //Vitória
             if ((ExisteVitoriaHorizontal() || ExisteVitoriaDiagonal() || ExisteVitoriaVertical()) && !FimDeJogo)
             {
                 FimDeJogo = true;
@@ -267,7 +305,9 @@ namespace Testando
                 Console.WriteLine($"Fim de jogo. Vitória de {vez}.");
                 Console.ReadLine();
             }
-            else if ((QuantidadePreenchida == 8) && !FimDeJogo)
+            
+            //Empate
+            else if ((QuantidadePreenchida == 9) && !FimDeJogo)
             {
                 FimDeJogo = true;
                 Console.Clear();
@@ -281,18 +321,53 @@ namespace Testando
         private void MudarVez()
         {
             vez = vez == Simb1 ? Simb2 : Simb1;
-            QuantidadePreenchida++;
         }
 
-        private void VezJogador()
+        //Tempo por turno
+        public void Tempos()
         {
-            vez = Simb1;
+            if (QuantidadePreenchida > 0)
+            {
+                contagem++;
+            }
+            if (Dificuldade == "1")
+            {
+                limite = 3000;
+            }
+            else if (Dificuldade == "2")
+            {
+                limite = 6000;
+            }
+            else if (Dificuldade == "3")
+            {
+                limite = 10000;
+            }
+            PerdaDeVez();
         }
 
-        private void VezComputador()
+        public void PerdaDeVez()
         {
-            vez = Simb2;
+            if (!FimDeJogo)
+            {
+                if (limite < contagem)
+                {
+                    if (Adversario == 1)
+                    {
+                        contagem = 0;
+                        MudarVez();
+                    }
+                    else if (Adversario == 2)
+                    {
+                        MudarVez();
+                        computadorVez();
+                        VerificarFimDeJogo();
+                        Delay();
+                        MudarVez();
+                    }
+                }
+            }
         }
+        
 
         // Escolhas de marcação do computador
         public void computadorVez()
@@ -301,113 +376,148 @@ namespace Testando
             {
                 return;
             }
+            int linhas = 0;
+
+            //Verificando linhas
+            bool jogadaFeita = false;
+
+            while (linhas < 2)
+            {
+                if (jogadaFeita) { break; }
+                else
+                {
+                    if (Posicoes[linhas, 0] == Posicoes[linhas, 1] && Posicoes[linhas, 0] == Simb1 && Posicoes[linhas, 2] == " ")
+                    {
+                        PreencherEscolha(linhas, 2);
+                        QuantidadePreenchida++;
+                        jogadaFeita = true;
+                    }
+                    else if (Posicoes[linhas, 0] == Posicoes[linhas, 2] && Posicoes[linhas, 0] == Simb1 && Posicoes[linhas, 1] == " ")
+                    {
+                        PreencherEscolha(linhas, 1);
+                        QuantidadePreenchida++;
+                        jogadaFeita = true;
+                    }
+                    else if (Posicoes[linhas, 1] == Posicoes[linhas, 2] && Posicoes[linhas, 1] == Simb1 && Posicoes[linhas, 0] == " ")
+                    {
+                        PreencherEscolha(linhas, 0);
+                        QuantidadePreenchida++;
+                        jogadaFeita = true;
+                    }
+                }
+                linhas++;
+            }
+                               
+
+            //Verificando colunas
+            int colunas = 0;
+            while (colunas < 2)
+            {
+                if (jogadaFeita) { break; }
+                else
+                {
+                    if (Posicoes[0, colunas] == Posicoes[1, colunas] && Posicoes[0, colunas] == Simb1 && Posicoes[2, colunas] == " ")
+                    {
+                        PreencherEscolha(2, colunas);
+                        QuantidadePreenchida++;
+                        jogadaFeita = true;
+                    }
+                    else if (Posicoes[0, colunas] == Posicoes[2, colunas] && Posicoes[0, colunas] == Simb1 && Posicoes[0, colunas] == Simb1 && Posicoes[1, colunas] == " ")
+                    {
+                        PreencherEscolha(1, colunas);
+                        QuantidadePreenchida++;
+                        jogadaFeita = true;
+                    }
+                    else if (Posicoes[1, colunas] == Posicoes[2, colunas] && Posicoes[1, colunas] == Simb1 && Posicoes[0, colunas] == " ")
+                    {
+                        PreencherEscolha(0, colunas);
+                        QuantidadePreenchida++;
+                        jogadaFeita = true;
+                    }
+                }
+                colunas++;
+            }
+
+            //Verificando diagonal que vai para baixo
+            if (!jogadaFeita) 
+            {
+                if (Posicoes[0, 0] == Posicoes[1, 1] && Posicoes[0, 0] == Simb1 && Posicoes[2, 2] == " ")
+                {
+                    PreencherEscolha(2, 2);
+                    QuantidadePreenchida++;
+                    jogadaFeita = true;
+                }
+                if (Posicoes[0, 0] == Posicoes[2, 2] && Posicoes[0, 0] == Simb1 && Posicoes[1, 1] == " ")
+                {
+                    PreencherEscolha(1, 1);
+                    QuantidadePreenchida++;
+                    jogadaFeita = true;
+                }
+                if (Posicoes[1, 1] == Posicoes[2, 2] && Posicoes[1, 1] == Simb1 && Posicoes[0, 0] == " ")
+                {
+                    PreencherEscolha(1, 1);
+                    QuantidadePreenchida++;
+                    jogadaFeita = true;
+                }
+            }
+
+            //Verificando diagonal que vai para cima
+            if (!jogadaFeita)
+            {
+                if (Posicoes[2, 0] == Posicoes[1, 1] && Posicoes[2, 0] == Simb1 && Posicoes[0, 2] == " ")
+                {
+                    PreencherEscolha(0, 2);
+                    QuantidadePreenchida++;
+                    jogadaFeita = true;
+                }
+                if (Posicoes[2, 0] == Posicoes[0, 2] && Posicoes[2, 0] == Simb1 && Posicoes[1, 1] == " ")
+                {
+                    PreencherEscolha(1, 1);
+                    QuantidadePreenchida++;
+                    jogadaFeita = true;
+                }
+                if (Posicoes[1, 1] == Posicoes[0, 2] && Posicoes[1, 1] == Simb1 && Posicoes[2, 0] == " ")
+                {
+                    PreencherEscolha(2, 0);
+                    QuantidadePreenchida++;
+                    jogadaFeita = true;
+                }
+            }
+
+            // Marcando aleatorimente
             int trava = 0;
             while (trava != 1)
             {
-                Random NumAleatorio1 = new Random();
-                Random NumAleatorio2 = new Random();
-                int EscolhaComp1 = NumAleatorio1.Next(0, 3);
-                int EscolhaComp2 = NumAleatorio2.Next(0, 3);
-                if (Posicoes[EscolhaComp1, EscolhaComp2] != Simb1 && Posicoes[EscolhaComp1, EscolhaComp2] != Simb2)
+                if (jogadaFeita) { break; }
+                else
                 {
-                    trava = 1;
-                    PreencherEscolha(EscolhaComp1, EscolhaComp2);
-                }
-                else { }
-                /*
-
-                    // Verificando a linha 1
-                    if ((Posicoes[0] == Posicoes[1] && Posicoes[0] == 'X') && (Posicoes[2] != 'X') && (Posicoes[2] != 'O'))
-                        PreencherEscolha(3);
-                    else if ((Posicoes[0] == Posicoes[2] && Posicoes[0] == 'X') && (Posicoes[1] != 'X') && (Posicoes[1] != 'O'))
-                        PreencherEscolha(2);
-                    else if ((Posicoes[1] == Posicoes[2] && Posicoes[0] == 'X') && (Posicoes[0] != 'X') && (Posicoes[0] != 'O'))
-                        PreencherEscolha(1);
-
-                    // Verificando a linha 2
-                    else if ((Posicoes[3] == Posicoes[4] && Posicoes[3] == 'X') && (Posicoes[5] != 'X') && (Posicoes[5] != 'O'))
-                        PreencherEscolha(6);
-                    else if ((Posicoes[3] == Posicoes[5] && Posicoes[3] == 'X') && (Posicoes[4] != 'X') && (Posicoes[4] != 'O'))
-                        PreencherEscolha(5);
-                    else if ((Posicoes[4] == Posicoes[5] && Posicoes[4] == 'X') && (Posicoes[3] != 'X') && (Posicoes[3] != 'O'))
-                        PreencherEscolha(4);
-
-                    // Verificando a linha 3
-                    else if ((Posicoes[6] == Posicoes[7] && Posicoes[6] == 'X') && (Posicoes[8] != 'X') && (Posicoes[8] != 'O'))
-                        PreencherEscolha(9);
-                    else if ((Posicoes[6] == Posicoes[8] && Posicoes[6] == 'X') && (Posicoes[7] != 'X') && (Posicoes[7] != 'O'))
-                        PreencherEscolha(8);
-                    else if ((Posicoes[7] == Posicoes[8] && Posicoes[7] == 'X') && (Posicoes[6] != 'X') && (Posicoes[6] != 'O'))
-                        PreencherEscolha(7);
-
-                    //Verificando a coluna 1
-                    else if ((Posicoes[0] == Posicoes[3] && Posicoes[0] == 'X') && (Posicoes[6] != 'X') && (Posicoes[6] != 'O'))
-                        PreencherEscolha(7);
-                    else if ((Posicoes[0] == Posicoes[6] && Posicoes[0] == 'X') && (Posicoes[3] != 'X') && (Posicoes[3] != 'O'))
-                        PreencherEscolha(4);
-                    else if ((Posicoes[3] == Posicoes[6] && Posicoes[3] == 'X') && (Posicoes[0] != 'X') && (Posicoes[0] != 'O'))
-                        PreencherEscolha(1);
-
-                    //Verificando a coluna 2
-                    else if ((Posicoes[1] == Posicoes[4] && Posicoes[1] == 'X') && (Posicoes[7] != 'X') && (Posicoes[7] != 'O'))
-                        PreencherEscolha(8);
-                    else if ((Posicoes[1] == Posicoes[7] && Posicoes[1] == 'X') && (Posicoes[4] != 'X') && (Posicoes[4] != 'O'))
-                        PreencherEscolha(5);
-                    else if ((Posicoes[4] == Posicoes[7] && Posicoes[4] == 'X') && (Posicoes[1] != 'X') && (Posicoes[1] != 'O'))
-                        PreencherEscolha(2);
-
-                    //Verificando a coluna 3
-                    else if ((Posicoes[2] == Posicoes[5] && Posicoes[2] == 'X') && (Posicoes[8] != 'X') && (Posicoes[8] != 'O'))
-                        PreencherEscolha(9);
-                    else if ((Posicoes[2] == Posicoes[8] && Posicoes[2] == 'X') && (Posicoes[5] != 'X') && (Posicoes[5] != 'O'))
-                        PreencherEscolha(6);
-                    else if ((Posicoes[5] == Posicoes[8] && Posicoes[8] == 'X') && (Posicoes[2] != 'X') && (Posicoes[2] != 'O'))
-                        PreencherEscolha(3);
-
-                    //Verificando a diagonal 1
-                    else if ((Posicoes[0] == Posicoes[4] && Posicoes[0] == 'X') && (Posicoes[8] != 'X') && (Posicoes[8] != 'O'))
-                        PreencherEscolha(9);
-                    else if ((Posicoes[0] == Posicoes[8] && Posicoes[0] == 'X') && (Posicoes[4] != 'X') && (Posicoes[4] != 'O'))
-                        PreencherEscolha(5);
-                    else if ((Posicoes[4] == Posicoes[8] && Posicoes[4] == 'X') && (Posicoes[0] != 'X') && (Posicoes[0] != 'O'))
-                        PreencherEscolha(1);
-
-                    //Verificando a diagonal 2
-                    else if ((Posicoes[2] == Posicoes[4] && Posicoes[2] == 'X') && (Posicoes[6] != 'X') && (Posicoes[6] != 'O'))
-                        PreencherEscolha(7);
-                    else if ((Posicoes[2] == Posicoes[6] && Posicoes[2] == 'X') && (Posicoes[4] != 'X') && (Posicoes[4] != 'O'))
-                        PreencherEscolha(5);
-                    else if ((Posicoes[4] == Posicoes[6] && Posicoes[4] == 'X') && (Posicoes[2] != 'X') && (Posicoes[2] != 'O'))
-                        PreencherEscolha(3);
-                    else
+                    Random NumAleatorio1 = new Random();
+                    Random NumAleatorio2 = new Random();
+                    int EscolhaComp1 = NumAleatorio1.Next(0, 3);
+                    int EscolhaComp2 = NumAleatorio2.Next(0, 3);
+                    if (Posicoes[EscolhaComp1, EscolhaComp2] != Simb1 && Posicoes[EscolhaComp1, EscolhaComp2] != Simb2)
                     {
-                        int trava = 0;
-                        while (trava != 1)
-                        {
-                            Random NumAleatorio = new Random();
-                            int EscolhaComp = NumAleatorio.Next(1, 9);
-                            if (Posicoes[EscolhaComp - 1] != 'X' && Posicoes[EscolhaComp - 1] != 'O')
-                            {
-                                trava = 1;
-                                PreencherEscolha(EscolhaComp);
-                                Lista1.Add(EscolhaComp);
-                            }
-                            else { string Nada = "Absolutamente nada";}
-                        }
+                        trava = 1;
+                        jogadaFeita = true;
+                        QuantidadePreenchida++;
+                        PreencherEscolha(EscolhaComp1, EscolhaComp2);
                     }
-                */
+                }
             }
+            contagem = 0;
         }
 
+        // Tempo que o computador demora para jogar depois do usuário jogar
         public void Delay()
         {
             var t = Task.Run(async delegate
             {
-                await Task.Delay(300);
+                await Task.Delay(200);
                 return ;
             });
             t.Wait();
         }
+
 
         // Sistema de pontuação
         private void Pontos()
@@ -482,7 +592,6 @@ namespace Testando
         private void VerEscolhaUsuario()
         {
             Console.WriteLine($"Agora é a vez de {vez}, escolha uma posição disponível.");
-            
 
             if (Console.KeyAvailable)
             {
@@ -528,6 +637,7 @@ namespace Testando
             Console.WriteLine(ObterTabela());
         }
 
+        //Adiciona espaços vazios no array Posicoes
         private void MostradosNaTabela()
         {
             Posicoes[0, 0] = " "; Posicoes[0, 1] = " "; Posicoes[0, 2] = " ";
@@ -555,8 +665,8 @@ namespace Testando
                    $"|-----|-----|-----|                                        {Texto1}: {Pontos_jogador1}\n" +
                    $"│  {Posicoes[0, 0]}  │  {Posicoes[0, 1]}  │  {Posicoes[0, 2]}  │                                        Pontuação do {jogadorAdver}: {Pontos_jogador2}\n" +
                    $"│-----│-----│-----│\n" +
-                   $"│  {Posicoes[1, 0]}  │  {Posicoes[1, 1]}  │  {Posicoes[1, 2]}  │\n" +
-                   $"│-----│-----│-----│\n" +
+                   $"│  {Posicoes[1, 0]}  │  {Posicoes[1, 1]}  │  {Posicoes[1, 2]}  │                                             Tempo: {contagem}\n" +
+                   $"│-----│-----│-----│                                             Limite de tempo: {limite}\n" +
                    $"│  {Posicoes[2, 0]}  │  {Posicoes[2, 1]}  │  {Posicoes[2, 2]}  │\n" +
                    $"│_____│_____│_____│\n\n";
                     
