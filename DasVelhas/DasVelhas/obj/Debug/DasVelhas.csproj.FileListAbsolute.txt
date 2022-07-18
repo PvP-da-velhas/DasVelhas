@@ -6,3 +6,11 @@ C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.csproj.Sugge
 C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.csproj.CoreCompileInputs.cache
 C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.exe
 C:\Users\Miguel\Desktop\Ava\DasVelhas\DasVelhas\obj\Debug\DasVelhas.pdb
+C:\Users\Japin\Desktop\Porgramação\Geração 2\Projeto GTHC\DasVelhas\DasVelhas\bin\Debug\DasVelhas.exe.config
+C:\Users\Japin\Desktop\Porgramação\Geração 2\Projeto GTHC\DasVelhas\DasVelhas\bin\Debug\DasVelhas.exe
+C:\Users\Japin\Desktop\Porgramação\Geração 2\Projeto GTHC\DasVelhas\DasVelhas\bin\Debug\DasVelhas.pdb
+C:\Users\Japin\Desktop\Porgramação\Geração 2\Projeto GTHC\DasVelhas\DasVelhas\obj\Debug\DasVelhas.csproj.AssemblyReference.cache
+C:\Users\Japin\Desktop\Porgramação\Geração 2\Projeto GTHC\DasVelhas\DasVelhas\obj\Debug\DasVelhas.csproj.SuggestedBindingRedirects.cache
+C:\Users\Japin\Desktop\Porgramação\Geração 2\Projeto GTHC\DasVelhas\DasVelhas\obj\Debug\DasVelhas.csproj.CoreCompileInputs.cache
+C:\Users\Japin\Desktop\Porgramação\Geração 2\Projeto GTHC\DasVelhas\DasVelhas\obj\Debug\DasVelhas.exe
+C:\Users\Japin\Desktop\Porgramação\Geração 2\Projeto GTHC\DasVelhas\DasVelhas\obj\Debug\DasVelhas.pdb
