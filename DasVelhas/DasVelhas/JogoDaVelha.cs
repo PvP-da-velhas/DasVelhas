@@ -662,13 +662,13 @@ namespace Testando
                 jogadorAdver = "Computador";
             }
             return
-                   $"|-----|-----|-----|                                        {Texto1}: {Pontos_jogador1}\n" +
-                   $"│  {Posicoes[0, 0]}  │  {Posicoes[0, 1]}  │  {Posicoes[0, 2]}  │                                        Pontuação do {jogadorAdver}: {Pontos_jogador2}\n" +
-                   $"│-----│-----│-----│\n" +
-                   $"│  {Posicoes[1, 0]}  │  {Posicoes[1, 1]}  │  {Posicoes[1, 2]}  │                                             Tempo: {contagem}\n" +
-                   $"│-----│-----│-----│                                             Limite de tempo: {limite}\n" +
-                   $"│  {Posicoes[2, 0]}  │  {Posicoes[2, 1]}  │  {Posicoes[2, 2]}  │\n" +
-                   $"│_____│_____│_____│\n\n";
+                $"|-----|-----|-----|                                        {Texto1}: {Pontos_jogador1}\n" +
+                $"│  {Posicoes[0, 0]}  │  {Posicoes[0, 1]}  │  {Posicoes[0, 2]}  │                                        Pontuação do {jogadorAdver}: {Pontos_jogador2}\n" +
+                $"│-----│-----│-----│\n" +
+                $"│  {Posicoes[1, 0]}  │  {Posicoes[1, 1]}  │  {Posicoes[1, 2]}  │                                             Tempo: {contagem}\n" +
+                $"│-----│-----│-----│                                             Limite de tempo: {limite}\n" +
+                $"│  {Posicoes[2, 0]}  │  {Posicoes[2, 1]}  │  {Posicoes[2, 2]}  │\n" +
+                $"│_____│_____│_____│\n\n";
                     
         }
     }
